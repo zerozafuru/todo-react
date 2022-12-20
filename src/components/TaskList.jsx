@@ -1,22 +1,18 @@
-const TaskList = () => {
+import React, { useState } from "react"
+import TaskItem from "./TaskItem";
+
+const TaskList = (props) => {
+  const { todos, setTodos } = props;
   return (
-    <>
-      Tasks:
-      <>
-        <input type='button' value='all' />
-        <input type='button' value='done' />
-        <input type='button' value='Todo' />
-      </>
-      <ul>
-        <li>dfsdfdsf</li>
-      </ul>
-      <>
-        <input type='button' value='Delete all' />
-        <input type='button' value='Delete done' />
-        
-      </>
-    </>
+    todos.map((todo) => (
+      <TaskItem key={todo.id} todos={todos} todo={todo} setTodos={setTodos} />
+
+    ))
+
   )
 }
+
+
+
 
 export default TaskList;

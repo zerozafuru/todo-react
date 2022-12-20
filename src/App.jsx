@@ -1,20 +1,26 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 
 import Header from './components/Header';
-import InputForm from './components/InputForm';
+import TodoForm from './components/TodoForm';
 import TaskList from './components/TaskList';
+import Buttons from './components/Buttons';
+import Footer from './components/Footer';
+
 
 
 function App() {
-  const [todo, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
+
+  
 
   return (
-    <>
+    <div className="container">
       <Header />
-      <InputForm todo={todo} setTodo={setTodo} />
-      <TaskList />
-
-    </>
+      <TodoForm todos={todos} setTodos={setTodos} />
+      <TaskList todos={todos} setTodos={setTodos}/>
+      <Buttons />
+      <Footer />
+    </div>
   );
 }
 
