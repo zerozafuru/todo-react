@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <p>Footer</p>
+    <p>double click to change task</p>
   )
 }
 
