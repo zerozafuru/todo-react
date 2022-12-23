@@ -13,12 +13,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
-  return (
+  const [filter, setFilter] = useState(todos)
+ 
+    return (
     <div className="container">
       <Header />
       <TodoForm todos={todos} setTodos={setTodos} />
-      <TaskList todos={todos} setTodos={setTodos} />
-      <Buttons />
+      <TaskList todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
+      <Buttons todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
       <Footer />
     </div>
   );
