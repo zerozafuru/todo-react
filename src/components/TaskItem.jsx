@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 const TaskItem = (props) => {
-  const { todos, setTodos, todo } = props;
+  const { todos, setTodos, todo, filter, setFilter  } = props;
   const [text, setText] = useState('');
   const [edit, setEdit] = useState(false);
   const [toggle, setToggle] = useState(todo.completed)
 
 
   const deleteTask = (id) => {
-    const newTodo = todos.filter(todo => todo.id != id)
+    const newTodo = todos.filter(todo => todo.id !== id)
     setTodos(newTodo);
   }
 
@@ -26,6 +26,9 @@ const TaskItem = (props) => {
     localStorage.setItem('todos', JSON.stringify(todos))
     setToggle(!toggle)
   }
+
+ 
+
 
   return (
     <li>
