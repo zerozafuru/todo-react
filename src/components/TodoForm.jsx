@@ -1,4 +1,4 @@
-import React, { useState, use } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const TodoForm = (props) => {
@@ -16,12 +16,17 @@ const TodoForm = (props) => {
       setTodos([todo, ...todos]);
     }
   }
+
+  const deleteAll = () => {
+    setTodos([])
+  }
+  
+
   return (
     <form className="create-form" onSubmit={(e) => saveTask(e)}>
-
-
+      <input type='checkbox' />
       <input className="create-input" autoFocus value={text} onChange={(e) => setText(e.target.value)} type="text" placeholder="What needs to be done?" />
-
+      <button type="button" onClick={() => deleteAll()}>&#10006;</button>
     </form>
   )
 }
