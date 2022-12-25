@@ -14,13 +14,14 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
   const [filter, setFilter] = useState(todos)
- 
-    return (
+  const [sort, setSort] = useState('all')
+
+  return (
     <div className="container">
       <Header />
-      <TodoForm todos={todos} setTodos={setTodos} />
-      <TaskList todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
-      <Buttons todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
+      <TodoForm todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
+      <TaskList todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
+      <Buttons todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
       <Footer />
     </div>
   );
