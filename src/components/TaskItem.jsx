@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import sortAll from "../utills/sortAll";
+import sortTodo from "../utills/sortTodo";
+import sortDone from "../utills/sortDone";
 
 const TaskItem = (props) => {
-  const { todos, setTodos, todo, filter, setFilter  } = props;
+  const { todos, setTodos, todo, filter, setFilter, sort, setSort } = props;
   const [text, setText] = useState('');
   const [edit, setEdit] = useState(false);
   const [toggle, setToggle] = useState(todo.completed)
@@ -10,6 +13,24 @@ const TaskItem = (props) => {
   const deleteTask = (id) => {
     const newTodo = todos.filter(todo => todo.id !== id)
     setTodos(newTodo);
+
+    switch (sort) {
+      case 'all':
+        sortAll(setFilter, setSort, newTodo)
+        break;
+      case 'todo':
+        sortTodo(setFilter, setSort, newTodo)
+        break;
+      case 'done':
+        sortDone(setFilter, setSort, newTodo)
+        break;
+
+      default:
+        break;
+    }
+
+
+
   }
 
   const renameTask = (e) => {
@@ -27,7 +48,7 @@ const TaskItem = (props) => {
     setToggle(!toggle)
   }
 
- 
+
 
 
   return (
