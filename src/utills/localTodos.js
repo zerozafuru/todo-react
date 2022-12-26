@@ -1,4 +1,4 @@
-const useLocal = () => {
+const localTodos = () => {
   if (localStorage.getItem('todos') == null) {
     return []
   } else {
@@ -6,4 +6,4 @@ const useLocal = () => {
   }
 }
 
-export default useLocal;
+export default localTodos;

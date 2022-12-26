@@ -4,7 +4,7 @@ import sortTodo from "../utills/sortTodo";
 import sortDone from "../utills/sortDone";
 
 const TaskItem = (props) => {
-  const { todos, setTodos, todo, filter, setFilter, sort, setSort } = props;
+  const { todos, setTodos, todo, filter, setFilter, sort, setSort, toggleAll, setToggleAll } = props;
   const [text, setText] = useState('');
   const [edit, setEdit] = useState(false);
   const [toggle, setToggle] = useState(todo.completed)
@@ -43,9 +43,20 @@ const TaskItem = (props) => {
   }
 
   const completeTask = () => {
+
+    if (toggleAll) {
+      if (toggleAll == toggle) {
+        setToggleAll(!toggle)
+      }
+    }
     todo.completed = !todo.completed
+
     localStorage.setItem('todos', JSON.stringify(todos))
     setToggle(!toggle)
+
+
+
+
   }
 
 
@@ -55,7 +66,7 @@ const TaskItem = (props) => {
     <li>
       <form className="rename-form" onSubmit={(e) => renameTask(e)} >
         <label >
-          <input type='checkbox' onChange={() => completeTask()} checked={toggle} />
+          <input type='checkbox' onChange={() => completeTask()} checked={toggleAll ? (true) : (toggle)} />
           {edit ? (
             <input value={text} onChange={(e) => setText(e.target.value)} onBlur={(e) => setEdit(false)} type="text" autoFocus></input>
           ) : (
