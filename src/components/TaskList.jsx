@@ -1,23 +1,24 @@
+import React from "react";
 import TaskItem from "./TaskItem";
 
+
 const TaskList = (props) => {
-  const { todos, setTodos, filter, setFilter, sort, setSort, toggleAll, setToggleAll } = props;
 
   return (
-    filter.map((todo) => (
+    props.todos.map((todo) => (
       <TaskItem
         key={todo.id}
-        todos={todos}
         todo={todo}
-        setTodos={setTodos}
-        filter={filter}
-        setFilter={setFilter}
-        sort={sort}
-        setSort={setSort}
-        toggleAll={toggleAll}
-        setToggleAll={setToggleAll} />
+        renameTask={props.renameTask}
+        completeTask={props.completeTask}
+        setText={props.setText}
+        edit={props.edit}
+        setEdit={props.setEdit}
+        deleteTask={props.deleteTask}
+      />
+    )
     ))
-  )
+
 }
 
 export default TaskList;
