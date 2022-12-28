@@ -1,0 +1,15 @@
+.form {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 20px 10px;
+  gap: 10px;
+  
+}
+.input {
+  border: none;
+  outline: none;
+  font-size: 20px;
+}

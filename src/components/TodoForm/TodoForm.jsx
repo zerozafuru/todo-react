@@ -1,17 +1,17 @@
 import React from "react";
+import styles from "./TodoForm.module.css"
 
 const TodoForm = (props) => {
 
   return (
     <form
-      className="create-form"
-      onSubmit={(e) => props.saveTask(e,props.text)}>
+      className={styles.form}
+      onSubmit={(e) => props.saveTask(e, props.text)}>
       <input
         type='checkbox'
         onChange={() => props.completeAll(props.todos)}
         checked={props.toggleAll} />
-      <input
-        className="create-input"
+      <input className={styles.input}
         autoFocus
         value={props.text}
         onChange={(e) => props.setText(e.target.value)}

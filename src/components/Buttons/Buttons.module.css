@@ -1,0 +1,44 @@
+.btns{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.span{
+  width: 33%;
+}
+
+.filters{
+  display: flex;
+  gap: 10px;
+}
+
+.deleteAll{
+  display: flex;
+  justify-content: flex-end;
+  width: 33%;
+}
+
+.btnOff,.btnOn{
+
+  text-align: center;
+  border: solid 1px;
+  border-radius: 30px;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.btnOff{
+  background-color: transparent;
+}
+.btnOn{
+  background-color: white;
+}
+
+.btnOff:hover,.btnOn:hover{
+
+  background-color: white;
+}
+
