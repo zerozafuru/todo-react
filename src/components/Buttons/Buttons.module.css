@@ -17,7 +17,7 @@
 
 .filters{
   display: flex;
-  
+  gap: 2px;
   
   border-radius: 30px;
   

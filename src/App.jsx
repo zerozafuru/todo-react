@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo} from "react";
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useEffect, useMemo } from "react";
+
 import styles from "./App.module.css"
 
 import Header from './components/Header/Header';
@@ -12,77 +12,37 @@ import Footer from './components/Footer/Footer';
 
 function App() {
 
-  const localTodos = () => {
-    if (localStorage.getItem('todos') == null) {
-      return []
-    } else {
-      return JSON.parse(localStorage.getItem('todos'))
+  const localLoad = (key, value) => {
+    const item = localStorage.getItem(key)
+    if (item == null) {
+      return value
     }
+    return JSON.parse(item)
   }
 
-  const localToggleAll = () => {
-    if (localStorage.getItem('toggleAll') == null) {
-      return false
-    } else {
-      return JSON.parse(localStorage.getItem('toggleAll'))
-    }
-  }
+  const localTodos = localLoad('todos', [])
+  const localToggleAll = localLoad('toggleAll', false)
+  const localFilter = localLoad('filter', 'all')
 
-  const localFilter = () => {
-    if (localStorage.getItem('filter') == null) {
-      return "all"
-    } else {
-      return JSON.parse(localStorage.getItem('filter'))
-    }
-  }
+  // 
 
-
-  const [todos, setTodos] = useState(localTodos);
+  const [todos, setTodos] = useState(localLoad('todos', []));
   const [filter, setFilter] = useState(localFilter);
-  const [text, setText] = useState('');
- 
-  const [toggle, setToggle] = useState(false)
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  useEffect(() => {
-    localStorage.setItem('filter', JSON.stringify(filter));
-  }, [filter]);
-
   const [toggleAll, setToggleAll] = useState(localToggleAll)
-  useEffect(() => {
-    localStorage.setItem('toggleAll', JSON.stringify(toggleAll));
-  }, [toggleAll]);
 
-  const createNewTodo = (text) => {
-    const todo = {
-      title: text,
-      completed: false,
-      id: uuidv4(),
-    }
-    setTodos([todo, ...todos]);
+  // 
+
+  const UsingEffect = (key, value) => {
+    useEffect(() => {
+      localStorage.setItem(value, JSON.stringify(key));
+    }, [key]);
   }
 
-  const saveTask = (e, text) => {
-    e.preventDefault();
-    if ((text !== '') && (text !== ' ')) {
-      createNewTodo(text)
-      setText("");
-    }
-  }
+  UsingEffect(todos,'todos')
+  UsingEffect(filter,'filter')
+  UsingEffect(toggleAll,'toggleAll')
 
-  const completeAll = () => {
-    const toggleAllCheck = !todos.every((todo) => todo.completed)
-    let completeTodo = todos.map((item) => ({
-      ...item,
-      completed: toggleAllCheck
-    }))
-    setToggleAll(toggleAllCheck)
-    setTodos(completeTodo)
-
-  }
+  // 
 
   const deleteTask = (id) => {
     const newTodo = todos.filter(todo => todo.id !== id)
@@ -90,21 +50,18 @@ function App() {
 
   }
 
-  const renameTask = (e, todo, setEdit, title) => {
-    e.preventDefault();
-    if ((title !== '') && (title !== ' ')) {
-      todo.title = title;
-      localStorage.setItem('todos', JSON.stringify(todos))
-      setEdit(false)
-    }
+
+  const renameTask = (title, id) => {
+
   }
 
   const completeTask = (todo) => {
 
     todo.completed = !todo.completed
     localStorage.setItem('todos', JSON.stringify(todos))
-    setToggle(!toggle)
+    // setToggle(!toggle)
     const toggleAllCheck = todos.every((todo) => todo.completed)
+
     if (toggleAllCheck) {
       setToggleAll(true)
     } else {
@@ -113,31 +70,32 @@ function App() {
 
   }
 
+  // 
+
   const deleteAll = () => {
     const newTodo = todos.filter(todo => todo.completed === false)
     setTodos(newTodo);
     setToggleAll(false)
-
   }
 
-  
+
 
   const filteredTodo = () => {
     switch (filter) {
       case 'all':
-        return (todos)
+        return todos
       case 'active':
-        return (todos.filter(todo => todo.completed === false))
+        return (todos.filter(todo => !todo.completed))
       case 'done':
-        return (todos.filter(todo => todo.completed === true))
+        return (todos.filter(todo => todo.completed))
       default:
         break;
     }
   }
 
 
-  const filteredTodos = useMemo(() => filteredTodo(), [filter,todos, toggleAll])
- 
+  const filteredTodos = useMemo(() => filteredTodo(), [filter, todos, toggleAll])
+
 
 
   return (
@@ -146,26 +104,31 @@ function App() {
         <Header className={styles.header} />
         <TodoForm
           className={styles.todoForm}
-          saveTask={saveTask}
-          createNewTodo={createNewTodo}
-          completeAll={completeAll}
-          setText={setText}
-          text={text}
+
+          todos={todos}
+          setTodos={setTodos}
+          
+          
+          
+          
+          
           toggleAll={toggleAll}
         />
         <ul className={styles.ul}>
           <TaskList
             className={styles.taskList}
+
             todos={filteredTodos}
             renameTask={renameTask}
             completeTask={completeTask}
-            setText={setText}
-            deleteTask={deleteTask}
             
+            deleteTask={deleteTask}
+
           />
         </ul>
         <Buttons
           className={styles.buttons}
+
           filter={filter}
           setFilter={setFilter}
           deleteAll={deleteAll}
@@ -174,7 +137,7 @@ function App() {
         />
 
       </div>
-      <Footer 
+      <Footer
         todos={filteredTodos}
       />
     </>

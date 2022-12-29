@@ -5,13 +5,20 @@ import styles from "./TaskItem.module.css"
 
 const TaskItem = (props) => {
   const [edit, setEdit] = useState(false);
-  const [title, setTitle] = useState(props.todo.title)
+  const [title, setTitle] = useState(props.todo.title);
+
+  const onTaskRename = (ev) => {
+    ev.preventDefault();
+    setEdit(false);
+    renameTask(title, props.todo.id)
+  }
+  
 
   return (
     <li className={styles.list}>
       <form
         className={styles.form}
-        onSubmit={(e) => props.renameTask(e, props.todo, setEdit, title)} >
+        onSubmit={onTaskRename} >
         <div className={styles.box}>
           <label >
             <input
