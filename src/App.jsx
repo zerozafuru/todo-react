@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useMemo} from "react";
 import { v4 as uuidv4 } from 'uuid';
 import styles from "./App.module.css"
 
@@ -28,8 +28,17 @@ function App() {
     }
   }
 
+  const localFilter = () => {
+    if (localStorage.getItem('filter') == null) {
+      return "all"
+    } else {
+      return JSON.parse(localStorage.getItem('filter'))
+    }
+  }
+
+
   const [todos, setTodos] = useState(localTodos);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(localFilter);
   const [text, setText] = useState('');
  
   const [toggle, setToggle] = useState(false)
@@ -37,6 +46,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('filter', JSON.stringify(filter));
+  }, [filter]);
 
   const [toggleAll, setToggleAll] = useState(localToggleAll)
   useEffect(() => {
@@ -107,6 +120,8 @@ function App() {
 
   }
 
+  
+
   const filteredTodo = () => {
     switch (filter) {
       case 'all':
@@ -121,7 +136,7 @@ function App() {
   }
 
 
-
+  const filteredTodos = useMemo(() => filteredTodo(), [filter,todos, toggleAll])
  
 
 
@@ -141,7 +156,7 @@ function App() {
         <ul className={styles.ul}>
           <TaskList
             className={styles.taskList}
-            todos={filteredTodo()}
+            todos={filteredTodos}
             renameTask={renameTask}
             completeTask={completeTask}
             setText={setText}
@@ -154,13 +169,13 @@ function App() {
           filter={filter}
           setFilter={setFilter}
           deleteAll={deleteAll}
-          todos={filteredTodo()}
+          todos={filteredTodos}
           realTodos={todos}
         />
 
       </div>
       <Footer 
-        todos={filteredTodo()}
+        todos={filteredTodos}
       />
     </>
   );

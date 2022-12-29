@@ -9,9 +9,12 @@ const Buttons = (props) => {
     return (
 
       <div className={styles.btns}>
-        <span className={styles.span}>
-          {props.todos.length} tasks left
-        </span>
+      <div className={styles.span}>
+        <span 
+        className={styles.btnOn}>
+          {props.todos.length}
+          </span>tasks
+          </div>
         <div className={styles.filters}>
           <button
             className={props.filter==='all' ? styles.btnOn : styles.btnOff}
@@ -35,7 +38,7 @@ const Buttons = (props) => {
             type="button"
             onClick={() => props.deleteAll()}
           >
-            clear completed
+            clear
           </button>
         </div>
       </div>

@@ -29,7 +29,9 @@ const TaskItem = (props) => {
               autoFocus>
             </input>
           ) : (
-            <div onDoubleClick={() => setEdit(true)}>
+            <div 
+            className={styles.name}
+            onDoubleClick={() => setEdit(true)}>
               {props.todo.title}
             </div>
           )}

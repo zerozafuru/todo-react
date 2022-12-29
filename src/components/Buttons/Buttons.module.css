@@ -4,15 +4,23 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
+  gap: 5px;
 }
 
 .span{
   width: 33%;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 14px;
 }
 
 .filters{
   display: flex;
-  gap: 10px;
+  
+  
+  border-radius: 30px;
+  
 }
 
 .deleteAll{
@@ -22,23 +30,29 @@
 }
 
 .btnOff,.btnOn{
-
+display: flex;
+width: max-content;
+align-items: center;
   text-align: center;
   border: solid 1px;
   border-radius: 30px;
   border-color: transparent;
   background-color: transparent;
+  padding: 1px 5px;
 }
 
 .btnOff{
   background-color: transparent;
+  
 }
 .btnOn{
   background-color: white;
 }
 
-.btnOff:hover,.btnOn:hover{
+
+.btnOff:hover {
 
   background-color: white;
+  color: black;
 }
 
