@@ -1,12 +1,10 @@
-
-
 import styles from "./Footer.module.css";
 
 const Footer = (props) => {
-  if (props.todos.length > 0) {
-  return (
-    <p className={styles.footer}>double click to change task</p>
-  )
+  if (props.filtTodos.length > 0) {
+    return (
+      <p className={styles.footer}>double click to change task</p>
+    )
   }
 }
 

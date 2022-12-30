@@ -1,26 +1,19 @@
 import React from "react";
-import TaskItem from "../TaskItem/TaskItem";
 
-
+import TaskItem from "../TaskItem";
 
 const TaskList = (props) => {
 
   return (
-
-    props.todos.map((todo) => (
-      
-        <TaskItem
-          key={todo.id}
-          todo={todo}
-          renameTask={props.renameTask}
-          completeTask={props.completeTask}
-          setText={props.setText}
-          deleteTask={props.deleteTask}
-          changeTask={props.changeTask}
-        />
-        )
-        ))
-
+    props.filtTodos.map((todo) => (
+      <TaskItem
+        key={todo.id}
+        todo={todo}
+        todos={props.todos}
+        setTodos={props.setTodos}
+      />
+    ))
+  )
 }
 
-        export default TaskList;
+export default TaskList;

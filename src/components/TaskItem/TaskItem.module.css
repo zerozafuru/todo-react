@@ -16,28 +16,35 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  width: 100%;
 }
 
 .btn {
-  color: transparent;
+  opacity: 0;
+  color: brown;
   background-color: transparent;
   border: none;
-
+  font-size: 20px;
 }
 
 .list:hover .btn {
-  color: black;
+  opacity: 1;
 }
 
-.rename{
+.rename {
   background-color: transparent;
   outline: none;
   border: none;
   font-size: 20px;
 }
 
-.name{
+.name {
   word-break: break-word;
-  
-  width: fit-content;
+}
+
+.name,
+.rename {
+  border-bottom: solid 3px darkgray;
+  padding: 5px 0;
+  width: 100%;
 }
