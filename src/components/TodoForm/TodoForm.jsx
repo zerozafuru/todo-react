@@ -1,19 +1,30 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
+
 import styles from "./TodoForm.module.css"
 
 const TodoForm = (props) => {
 
   const [text, setText] = useState('');
 
-  const editText = (e) => { setText(e.target.value) }
+  const saveNewTodo = (e) => {
+    e.preventDefault();
+    if (!text.trim) {
+      return
+    }
+    props.confirmTask(text)
+    setText('');
+  }
+
+  const editText = (e) => { 
+    setText(e.target.value) 
+  }
 
   return (
     <form
       className={styles.form}
-      onSubmit={props.createNewTodo(e, text)}>
+      onSubmit={saveNewTodo}>
       <input
-        className={props.todos.length ? styles.completeOn : styles.completeOff}
+        className={props.length ? styles.complete_on : styles.complete_off}
         type='checkbox'
         onChange={props.completeAll}
         checked={props.isComplete} />
@@ -22,7 +33,7 @@ const TodoForm = (props) => {
         autoFocus
         type="text"
         value={text}
-        onChange={editText(e)}
+        onChange={editText}
         placeholder="What needs to be done?" />
     </form>
   )

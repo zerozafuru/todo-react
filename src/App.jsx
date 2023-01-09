@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
-import styles from "./App.module.css"
+import { useState, useEffect, useMemo } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
-import Header from './components/Header/Header';
-import TodoForm from './components/TodoForm/TodoForm';
-import TaskList from './components/TaskList/TaskList';
-import Buttons from './components/Buttons/Buttons';
-import Footer from './components/Footer/Footer';
+import Header from './components/Header';
+import TodoForm from './components/TodoForm';
+import TaskList from './components/TaskList';
+import Buttons from './components/Buttons';
+import Footer from './components/Footer';
+
+import styles from "./App.module.css";
 
 const App = () => {
 
@@ -28,7 +30,7 @@ const App = () => {
     localStorage.setItem('filter', JSON.stringify(filter));
   }, [todos, filter]);
 
-  const filteredTodo = () => {
+  const filteredTodos = useMemo(() => {
     switch (filter) {
       case 'all':
         return todos
@@ -39,10 +41,7 @@ const App = () => {
       default:
         break;
     }
-  }
-
-  //  eslint-disable-next-line
-  const filteredTodos = useMemo(() => filteredTodo(), [filter, todos])
+  }, [filter, todos])
 
   const confirmTask = (text) => {
     const todo = {
@@ -50,16 +49,10 @@ const App = () => {
       id: uuidv4(),
       title: text,
     }
-    props.setTodos([todo, ...props.todos]);
+    setTodos([todo, ...todos]);
   }
 
-  const createNewTodo = (e, text) => {
-    e.preventDefault();
-    if (text.trim) {
-      confirmTask(text)
-    }
-    setText('');
-  }
+
 
   const isComplete = todos.every((todo) => todo.completed)
 
@@ -68,9 +61,48 @@ const App = () => {
       ...item,
       completed: !isComplete
     }))
-    props.setTodos(completeTodo)
+    setTodos(completeTodo)
   }
 
+  // 
+  const renameTask = (id, title) => {
+    if (!title.trim) {
+      return
+    }
+    const newTodos = todos.map((todo) => {
+      if (todo.id !== id) {
+        return todo
+      }
+      return { ...todo, title }
+    })
+    setTodos(newTodos)
+  }
+
+  const completeTask = (id) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id !== id) {
+        return todo
+      }
+      const updatedComplete = !todo.completed
+      return { ...todo, completed: updatedComplete }
+    })
+    setTodos(newTodos)
+  }
+
+
+  const deleteTask = (id) => {
+    const newTodo = todos.filter(todo => todo.id !== id)
+    setTodos(newTodo);
+  }
+
+  const deleteAll = () => {
+    const newTodo = todos.filter(todo => todo.completed === false)
+    setTodos(newTodo);
+  }
+
+  const editFilter = (value) => {
+    setFilter(value)
+  }
 
   return (
     <>
@@ -79,31 +111,32 @@ const App = () => {
         <Header
           className={styles.header} />
         <TodoForm
-          className={styles.todoForm}
-          createNewTodo={createNewTodo}
+
+          confirmTask={confirmTask}
           completeAll={completeAll}
           isComplete={isComplete}
+          length={todos.length}
         />
         <ul
           className={styles.ul}>
           <TaskList
             className={styles.taskList}
-            filtTodos={filteredTodos}
-            setTodos={setTodos}
-            todos={todos}
+            filteredTodos={filteredTodos}
+            deleteTask={deleteTask}
+            renameTask={renameTask}
+            completeTask={completeTask}
           />
         </ul>
         <Buttons
           className={styles.buttons}
           filter={filter}
-          setFilter={setFilter}
-          filtTodos={filteredTodos}
-          todos={todos}
-          setTodos={setTodos}
+          length={todos.length}
+          deleteAll={deleteAll}
+          editFilter={editFilter}
         />
       </div>
       <Footer
-        filtTodos={filteredTodos}
+        length={filteredTodos.length}
       />
     </>
   );

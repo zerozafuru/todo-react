@@ -1,16 +1,15 @@
-import React from "react";
-
 import TaskItem from "../TaskItem";
 
 const TaskList = (props) => {
 
   return (
-    props.filtTodos.map((todo) => (
+    props.filteredTodos.map((todo) => (
       <TaskItem
         key={todo.id}
         todo={todo}
-        todos={props.todos}
-        setTodos={props.setTodos}
+        deleteTask={props.deleteTask}
+        renameTask={props.renameTask}
+        completeTask={props.completeTask}
       />
     ))
   )

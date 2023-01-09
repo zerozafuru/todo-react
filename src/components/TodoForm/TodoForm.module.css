@@ -15,9 +15,9 @@
   width: 100%;
 }
 
-.completeOn{
+.complete_on{
   opacity: 1;
 }
-.completeOff{
+.complete_off{
   opacity: 0;
 }

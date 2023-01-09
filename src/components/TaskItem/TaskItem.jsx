@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import styles from "./TaskItem.module.css"
 
 const TaskItem = (props) => {
@@ -8,53 +9,15 @@ const TaskItem = (props) => {
   const onTaskRename = (e) => {
     e.preventDefault();
     setEdit(false);
-    renameTask(props.todo.id, title)
+    props.renameTask(props.todo.id, title)
   }
 
-  const renameTask = (id, title) => {
-    const foundedTask = props.todos.find(todo => todo.id === id)
-    const updatedTask = { ...foundedTask, title }
-    const index = props.todos.findIndex(todo => todo.id === id)
-    const newTodos = [...props.todos]
-    newTodos.splice(index, 1, updatedTask)
-    props.setTodos(newTodos)
+  const editTitle = (e) => { 
+    setTitle(e.target.value) 
   }
-
-  const completeTask = (id) => {
-    const foundedTask = props.todos.find(todo => todo.id === id)
-    const updatedComplete = !foundedTask.completed
-    const updatedTask = { ...foundedTask, completed: updatedComplete }
-    const index = props.todos.findIndex(todo => todo.id === id)
-    const newTodos = [...props.todos]
-    newTodos.splice(index, 1, updatedTask)
-    props.setTodos(newTodos)
-  }
-
-  // const changeTask = (id, title) => {
-  //   const foundedTask = props.todos.find(todo => todo.id === id)
-  //   let updatedTask
-  //   if (title === undefined) {
-  //     const updatedComplete = !foundedTask.completed
-  //     updatedTask = { ...foundedTask, completed: updatedComplete }
-  //   } else {
-  //     updatedTask = { ...foundedTask, title }
-  //   }
-  //   const index = props.todos.findIndex(todo => todo.id === id)
-  //   const newTodos = [...props.todos]
-  //   newTodos.splice(index, 1, updatedTask)
-  //   props.setTodos(newTodos)
-  // }
-
-  const deleteTask = (id) => {
-    const newTodo = props.todos.filter(todo => todo.id !== id)
-    props.setTodos(newTodo);
-  }
-
-  const editTitle = (e) => { setTitle(e.target.value) }
 
   const edited = () => {
-    const newEdit = !edit
-    setEdit(newEdit)
+    setEdit(!edit)
   }
 
   return (
@@ -62,13 +25,13 @@ const TaskItem = (props) => {
       className={styles.list}>
       <form
         className={styles.form}
-        onSubmit={(e) => onTaskRename(e)} >
+        onSubmit={onTaskRename} >
         <div
           className={styles.box}>
           <label >
             <input
               type='checkbox'
-              onChange={() => completeTask(props.todo.id)}
+              onChange={() => props.completeTask(props.todo.id)}
               checked={props.todo.completed}
             />
           </label>
@@ -76,15 +39,15 @@ const TaskItem = (props) => {
             <input
               className={styles.rename}
               value={title}
-              onChange={(e) => editTitle(e)}
-              onBlur={() => edited()}
+              onChange={editTitle}
+              onBlur={edited}
               type="text"
               autoFocus>
             </input>
           ) : (
             <div
               className={styles.name}
-              onDoubleClick={() => edited()}>
+              onDoubleClick={edited}>
               {props.todo.title}
             </div>
           )}
@@ -92,7 +55,7 @@ const TaskItem = (props) => {
         <button
           className={styles.btn}
           type="button"
-          onClick={() => deleteTask(props.todo.id)}>
+          onClick={() => props.deleteTask(props.todo.id)}>
           &#10006;
         </button>
       </form>

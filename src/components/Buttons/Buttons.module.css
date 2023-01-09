@@ -1,4 +1,4 @@
-.btns{
+.btns {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -7,7 +7,7 @@
   gap: 5px;
 }
 
-.span{
+.span {
   width: 33%;
   display: flex;
   gap: 5px;
@@ -15,44 +15,51 @@
   font-size: 14px;
 }
 
-.filters{
+.filters {
   display: flex;
-  gap: 2px;
   background-color: darkgray;
   border-radius: 30px;
-  
+
 }
 
-.deleteAll{
+.delete_all {
   display: flex;
   justify-content: flex-end;
   width: 33%;
 }
 
-.btnOff,.btnOn{
-display: flex;
-width: max-content;
-align-items: center;
+.btn_off,
+.btn_on,
+.btn_clear {
+  display: flex;
+  width: max-content;
+  align-items: center;
   text-align: center;
   border: solid 1px;
   border-radius: 30px;
   border-color: transparent;
   background-color: transparent;
   padding: 1px 5px;
+  color: black;
 }
 
-.btnOff{
+.btn_off {
   background-color: transparent;
-  
+  color: white;
 }
-.btnOn{
+
+.btn_on {
   background-color: white;
 }
 
-
-.btnOff:hover {
-
+.btn_off:hover,
+.btn_clear:hover,
+.filters:hover .btn_on:hover {
   background-color: white;
   color: black;
 }
 
+.filters:hover .btn_on {
+  background-color: transparent;
+  color: white;
+}

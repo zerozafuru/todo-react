@@ -1,56 +1,46 @@
-import React from "react";
 import styles from "./Buttons.module.css"
 
 const Buttons = (props) => {
 
-  const deleteAll = () => {
-    const newTodo = props.todos.filter(todo => todo.completed === false)
-    props.setTodos(newTodo);
-  }
-
-  const editFilter = (value) => {
-    props.setFilter(value)
-  }
-
-  if (props.todos.length) {
+  if (props.length) {
     return (
       <div
         className={styles.btns}>
         <div
           className={styles.span}>
           <span
-            className={styles.btnOn}>
-            {props.todos.length}
+            className={styles.btn_on}>
+            {props.length}
           </span>tasks
         </div>
         <div
           className={styles.filters}>
           <button
-            className={props.filter === 'all' ? styles.btnOn : styles.btnOff}
-            onClick={() => editFilter('all')}
+            className={props.filter === 'all' ? styles.btn_on : styles.btn_off}
+            onClick={() => props.editFilter('all')}
           >
             all
           </button>
           <button
-            className={props.filter === 'active' ? styles.btnOn : styles.btnOff}
-            onClick={() => editFilter('active')}
+            className={props.filter === 'active' ? styles.btn_on : styles.btn_off}
+            onClick={() => props.editFilter('active')}
           >
             active
           </button>
           <button
-            className={props.filter === 'done' ? styles.btnOn : styles.btnOff}
+            className={props.filter === 'done' ? styles.btn_on : styles.btn_off}
             type='button'
-            onClick={() => editFilter('done')}
+            onClick={() => props.editFilter('done')}
           >
             done
           </button>
         </div>
         <div
-          className={styles.deleteAll}>
+          className={styles.delete_all}>
           <button
-            className={styles.btnOff}
+            className={styles.btn_clear}
             type="button"
-            onClick={() => deleteAll()}
+            onClick={props.deleteAll}
           >
             clear
           </button>
