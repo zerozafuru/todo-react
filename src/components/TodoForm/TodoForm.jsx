@@ -8,15 +8,16 @@ const TodoForm = (props) => {
 
   const saveNewTodo = (e) => {
     e.preventDefault();
-    if (!text.trim) {
+    if (!text.trim()) {
+      setText('');
       return
     }
     props.confirmTask(text)
     setText('');
   }
 
-  const editText = (e) => { 
-    setText(e.target.value) 
+  const editText = (e) => {
+    setText(e.target.value)
   }
 
   return (
