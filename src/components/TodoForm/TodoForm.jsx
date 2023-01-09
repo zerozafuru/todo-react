@@ -8,7 +8,7 @@ const TodoForm = (props) => {
 
   const saveNewTodo = (e) => {
     e.preventDefault();
-    if (!text.trim) {
+    if (!text.trim()) {
       return
     }
     props.confirmTask(text)

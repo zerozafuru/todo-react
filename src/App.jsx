@@ -66,7 +66,7 @@ const App = () => {
 
   // 
   const renameTask = (id, title) => {
-    if (!title.trim) {
+    if (!title.trim()) {
       return
     }
     const newTodos = todos.map((todo) => {
