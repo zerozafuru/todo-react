@@ -46,7 +46,7 @@ const TaskItem = (props) => {
             </input>
           ) : (
             <div
-              className={styles.name}
+              className={props.todo.completed ? styles.name_done : styles.name_active}
               onDoubleClick={edited}>
               {props.todo.title}
             </div>
