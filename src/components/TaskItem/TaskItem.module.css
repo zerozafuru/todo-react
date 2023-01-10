@@ -40,13 +40,19 @@
   font-size: 20px;
 }
 
-.name {
+.name_acive,
+.name_done {
   word-break: break-word;
 }
 
-.name,
+.name_active,
+.name_done,
 .rename {
   border-bottom: solid 3px darkgray;
   padding: 5px 0;
   width: 100%;
+}
+.name_done {
+  text-decoration: line-through;
+  color: grey;
 }

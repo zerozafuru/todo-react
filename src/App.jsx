@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 
 import styles from "./App.module.css";
 
-const App = () => {
+const App = () => { 
 
   const localLoad = (key, value) => {
     const item = localStorage.getItem(key)
