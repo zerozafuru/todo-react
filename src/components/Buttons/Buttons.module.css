@@ -41,15 +41,18 @@
   background-color: transparent;
   padding: 1px 5px;
   color: black;
+  transition: 0.3s;
 }
 
 .btn_off {
   background-color: transparent;
   color: white;
+  
 }
 
 .btn_on {
   background-color: white;
+  
 }
 
 .btn_off:hover,
@@ -57,6 +60,7 @@
 .filters:hover .btn_on:hover {
   background-color: white;
   color: black;
+  transition: 0.3s;
 }
 
 .filters:hover .btn_on {

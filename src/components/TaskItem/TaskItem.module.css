@@ -25,10 +25,12 @@
   background-color: transparent;
   border: none;
   font-size: 20px;
+  transition: 0.3s;
 }
 
 .list:hover .btn {
   opacity: 1;
+  transition: 0.3s;
 }
 
 .rename {
