@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { completeTodo, deleteTodo, renameTodo } from "../../store/todosSlice";
 
 import styles from "./TaskItem.module.css"
 
@@ -6,17 +8,25 @@ const TaskItem = (props) => {
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(props.todo.title);
 
+  const dispatch = useDispatch()
+
   const onTaskRename = (e) => {
+
     e.preventDefault();
     setEdit(false);
-    props.renameTask(props.todo.id, title)
+    if (!title.trim()) {
+      setTitle(props.todo.title)
+      return
+    }
+    dispatch(renameTodo({ id: props.todo.id, text: title.trim() }))
   }
 
-  const editTitle = (e) => { 
-    setTitle(e.target.value) 
+  const editTitle = (e) => {
+    setTitle(e.target.value)
   }
 
   const edited = () => {
+    setTitle(props.todo.title)
     setEdit(!edit)
   }
 
@@ -31,7 +41,7 @@ const TaskItem = (props) => {
           <label >
             <input
               type='checkbox'
-              onChange={() => props.completeTask(props.todo.id)}
+              onChange={() => dispatch(completeTodo(props.todo.id))}
               checked={props.todo.completed}
             />
           </label>
@@ -55,7 +65,7 @@ const TaskItem = (props) => {
         <button
           className={styles.btn}
           type="button"
-          onClick={() => props.deleteTask(props.todo.id)}>
+          onClick={() => dispatch(deleteTodo(props.todo.id))}>
           &#10006;
         </button>
       </form>

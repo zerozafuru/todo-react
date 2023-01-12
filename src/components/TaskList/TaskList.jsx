@@ -1,15 +1,18 @@
+import { useSelector } from "react-redux";
 import TaskItem from "../TaskItem";
+import { filteredTodos } from "../../store/filters";
 
 const TaskList = (props) => {
 
+  const todos = useSelector(filteredTodos)
+
+
+
   return (
-    props.filteredTodos.map((todo) => (
+    todos.map((todo) => (
       <TaskItem
         key={todo.id}
         todo={todo}
-        deleteTask={props.deleteTask}
-        renameTask={props.renameTask}
-        completeTask={props.completeTask}
       />
     ))
   )
