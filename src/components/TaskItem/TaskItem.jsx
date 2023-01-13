@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { completeTodo, deleteTodo, renameTodo } from "../../store/todosSlice";
+import { toggleCompleted, deleteTodo, renameTodo } from "../../store/todosSlice";
 
 import styles from "./TaskItem.module.css"
 
@@ -25,7 +25,7 @@ const TaskItem = (props) => {
     setTitle(e.target.value)
   }
 
-  const edited = () => {
+  const editTodo = () => {
     setTitle(props.todo.title)
     setEdit(!edit)
   }
@@ -41,7 +41,7 @@ const TaskItem = (props) => {
           <label >
             <input
               type='checkbox'
-              onChange={() => dispatch(completeTodo(props.todo.id))}
+              onChange={() => dispatch(toggleCompleted(props.todo.id))}
               checked={props.todo.completed}
             />
           </label>
@@ -50,14 +50,14 @@ const TaskItem = (props) => {
               className={styles.rename}
               value={title}
               onChange={editTitle}
-              onBlur={edited}
+              onBlur={editTodo}
               type="text"
               autoFocus>
             </input>
           ) : (
             <div
               className={props.todo.completed ? styles.name_done : styles.name_active}
-              onDoubleClick={edited}>
+              onDoubleClick={editTodo}>
               {props.todo.title}
             </div>
           )}

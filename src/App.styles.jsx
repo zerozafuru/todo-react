@@ -1,4 +1,6 @@
-.container {
+import styled from "styled-components";
+
+const AppStyled = styled.div`
   margin: 50px auto 0 ;
   max-width: 500px;
   min-width: 250px;
@@ -9,6 +11,6 @@
   padding: 25px;
   padding-bottom: 0;
   border-radius: 30px;
-}
+`
 
-
+export default AppStyled;

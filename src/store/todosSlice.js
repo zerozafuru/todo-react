@@ -23,16 +23,12 @@ export const todosSlice = createSlice({
       )
     },
 
-    completeTodo: (state, action) => {
-      state.todos = state.todos.map(todo =>
-        todo.id === action.payload ? {
-          ...todo,
-          completed: !todo.completed
-        } :
-          todo)
+    toggleCompleted: (state, action) => {
+      const todo = state.todos.find(todo => todo.id === action.payload)
+      todo.completed = !todo.completed
     },
 
-    completeAllTodo: state => {
+    toggleAllCompleted: state => {
       const isComplete = state.todos.every((todo) => todo.completed)
       state.todos = state.todos.map((todo) => ({
         ...todo,
@@ -45,20 +41,15 @@ export const todosSlice = createSlice({
     },
 
     deleteDoneTodo: state => {
-      state.todos = (state.todos).filter(todo => todo.completed === false)
-      console.log(state.todos)
+      state.todos = state.todos.filter(todo => todo.completed === false)
     },
 
     renameTodo: (state, action) => {
-      state.todos = state.todos.map(todo =>
-        todo.id === action.payload.id ? {
-          ...todo,
-          title: action.payload.text
-        } :
-          todo)
+      const todo = state.todos.find(todo => todo.id === action.payload.id)
+      todo.title = action.payload.text
     },
 
-    setFilter: (state, action) => {
+    editFilter: (state, action) => {
       state.filter = action.payload
     }
 
@@ -67,12 +58,12 @@ export const todosSlice = createSlice({
 
 export const {
   createTodo,
-  completeAllTodo,
-  completeTodo,
+  toggleAllCompleted,
+  toggleCompleted,
   deleteTodo,
   deleteDoneTodo,
   renameTodo,
-  setFilter
+  editFilter
 } = todosSlice.actions
 
 export default todosSlice.reducer

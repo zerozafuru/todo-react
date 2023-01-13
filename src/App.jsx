@@ -1,33 +1,20 @@
+import TodoForm from './components/TodoForm/TodoForm';
+import TaskList from './components/TaskList/TaskList';
+import Buttons from './components/Buttons/Buttons';
+import Footer from './components/Footer/Footer';
 
-import Header from './components/Header';
-import TodoForm from './components/TodoForm';
-import TaskList from './components/TaskList';
-import Buttons from './components/Buttons';
-import Footer from './components/Footer';
-
-import styles from "./App.module.css";
+import AppStyled from './App.styles';
 
 const App = () => {
 
   return (
     <>
-      <div
-        className={styles.container}>
-        <Header
-          className={styles.header} />
-        <TodoForm
-        />
-        <ul
-          className={styles.ul}>
-          <TaskList
-          />
-        </ul>
-        <Buttons
-          className={styles.buttons}
-        />
-      </div>
-      <Footer
-      />
+      <AppStyled>
+        <TodoForm />
+        <TaskList />
+        <Buttons />
+      </AppStyled>
+      <Footer />
     </>
   );
 }
