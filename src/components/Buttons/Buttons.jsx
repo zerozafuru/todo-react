@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteDoneTodo, editFilter } from "../../store/todosSlice";
 import { filteredTodos } from "../../store/filtersSelector";
 
-import styles from "./Buttons.module.css"
-import { ButtonsStyled, NumberStyled, TasksNumberStyled } from "./Buttons.styles";
+
+import { ButtonsStyled, ButtonStyled, DeleteAllStyled, FiltersStyled, NumberStyled, TasksNumberStyled } from "./Buttons.styles";
 
 const Buttons = (props) => {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const Buttons = (props) => {
   if (!todos.length) {
     return
   }
-  
+
   return (
     <ButtonsStyled>
       <TasksNumberStyled>
@@ -26,38 +26,33 @@ const Buttons = (props) => {
           {filtTodos.length}
         </NumberStyled>tasks
       </TasksNumberStyled>
-      <div
-        className={styles.filters}>
-        <button
-          className={filter === 'all' ? styles.btn_on : styles.btn_off}
+      <FiltersStyled>
+        <ButtonStyled 
+          className={filter === 'all' ? 'active' : 'disabled'}
           onClick={() => setFilter('all')}
         >
           all
-        </button>
-        <button
-          className={filter === 'active' ? styles.btn_on : styles.btn_off}
+        </ButtonStyled>
+        <ButtonStyled
+          className={filter === 'active' ? 'active' : 'disabled'}
           onClick={() => setFilter('active')}
         >
           active
-        </button>
-        <button
-          className={filter === 'done' ? styles.btn_on : styles.btn_off}
-          type='button'
+        </ButtonStyled>
+        <ButtonStyled
+          className={filter === 'done' ? 'active' : 'disabled'}
           onClick={() => setFilter('done')}
         >
           done
-        </button>
-      </div>
-      <div
-        className={styles.delete_all}>
-        <button
-          className={styles.btn_clear}
-          type="button"
+        </ButtonStyled>
+      </FiltersStyled>
+      <DeleteAllStyled>
+        <ButtonStyled
           onClick={() => dispatch(deleteDoneTodo())}
         >
           clear
-        </button>
-      </div>
+        </ButtonStyled>
+      </DeleteAllStyled>
     </ButtonsStyled>
   )
 
