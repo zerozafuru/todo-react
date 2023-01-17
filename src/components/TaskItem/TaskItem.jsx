@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleCompleted, deleteTodo, renameTodo } from "../../store/todosSlice";
 
-import styles from "./TaskItem.module.css"
+import { BoxStyled, DeleteButtonStyled, FormStyled, ListStyled, NameStyled, RenameStyled } from "./TaskItem.styles";
 
 const TaskItem = (props) => {
   const [edit, setEdit] = useState(false);
@@ -31,13 +31,10 @@ const TaskItem = (props) => {
   }
 
   return (
-    <li
-      className={styles.list}>
-      <form
-        className={styles.form}
+    <ListStyled>
+      <FormStyled
         onSubmit={onTaskRename} >
-        <div
-          className={styles.box}>
+        <BoxStyled>
           <label >
             <input
               type='checkbox'
@@ -46,30 +43,28 @@ const TaskItem = (props) => {
             />
           </label>
           {edit ? (
-            <input
-              className={styles.rename}
+            <RenameStyled
               value={title}
               onChange={editTitle}
               onBlur={editTodo}
               type="text"
               autoFocus>
-            </input>
+            </RenameStyled>
           ) : (
-            <div
-              className={props.todo.completed ? styles.name_done : styles.name_active}
+            <NameStyled
+              className={props.todo.completed ? 'done' : 'active'}
               onDoubleClick={editTodo}>
               {props.todo.title}
-            </div>
+            </NameStyled>
           )}
-        </div>
-        <button
-          className={styles.btn}
+        </BoxStyled>
+        <DeleteButtonStyled
           type="button"
           onClick={() => dispatch(deleteTodo(props.todo.id))}>
           &#10006;
-        </button>
-      </form>
-    </li>
+        </DeleteButtonStyled>
+      </FormStyled>
+    </ListStyled>
   )
 }
 

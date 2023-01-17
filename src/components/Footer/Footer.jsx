@@ -1,6 +1,6 @@
 import { filteredTodos } from "../../store/filtersSelector";
 import { useSelector } from "react-redux";
-import styles from "./Footer.module.css";
+import { FooterStyled } from "./Footer.styles";
 
 const Footer = (props) => {
   const filtTodos = useSelector(filteredTodos)
@@ -9,7 +9,7 @@ const Footer = (props) => {
   }
 
   return (
-    <p className={styles.footer}>double click to change task</p>
+    <FooterStyled>double click to change task</FooterStyled>
   )
 }
 

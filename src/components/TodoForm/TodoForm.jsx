@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createTodo, toggleAllCompleted } from "../../store/todosSlice"
 
-import styles from "./TodoForm.module.css"
+import { CompleteStyled, FormStyled, InputStyled } from "./TodoForm.styles";
 
 const TodoForm = (props) => {
   const dispatch = useDispatch()
@@ -27,23 +27,21 @@ const TodoForm = (props) => {
 
   return (
     <>
-      <h1 className={styles.header}>todos</h1>
-      <form
-        className={styles.form}
+      <h1>todos</h1>
+      <FormStyled
         onSubmit={saveNewTodo}>
-        <input
-          className={todos.length ? styles.complete_on : styles.complete_off}
+        <CompleteStyled
+          className={todos.length ? 'done' : 'active'}
           type='checkbox'
           onChange={() => dispatch(toggleAllCompleted())}
           checked={isComplete} />
-        <input
-          className={styles.input}
+        <InputStyled
           autoFocus
           type="text"
           value={text}
           onChange={editText}
           placeholder="What needs to be done?" />
-      </form>
+      </FormStyled>
     </>
   )
 }
