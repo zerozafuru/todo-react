@@ -33,22 +33,15 @@ export const ButtonStyled = styled.button`
   text-align: center;
   border: solid 1px;
   border-radius: 30px;
+  background-color: ${(props) => props.isActive ? "white" : "transparent"};
   border-color: transparent;
-  background-color: transparent;
   padding: 1px 5px;
-  color: black;
+  color: ${(props) => props.clear ? "black": props.isActive ? "black" : "white"};
   transition: 0.3s;
   &:hover {
     background-color: white;
     color: black;
     transition: 0.3s;
-  }
-  &.active{
-    background-color: white;
-  }
-  &.disabled{
-    background-color: transparent;
-    color: white;
   }
 `
 
@@ -57,8 +50,6 @@ export const FiltersStyled = styled.div`
   background-color: darkgray;
   border-radius: 30px;
   &:hover ${ ButtonStyled } {
-    &.active
-      display: none;
       background-color: transparent;
       color: white;
       &:hover {
@@ -66,9 +57,9 @@ export const FiltersStyled = styled.div`
         color: black;
         transition: 0.3s;
       }
-    };
-  }
+    }
 `
+
 export const DeleteAllStyled = styled.div`
   display: flex;
   justify-content: flex-end;

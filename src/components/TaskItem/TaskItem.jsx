@@ -51,8 +51,7 @@ const TaskItem = (props) => {
               autoFocus>
             </RenameStyled>
           ) : (
-            <NameStyled
-              className={props.todo.completed ? 'done' : 'active'}
+            <NameStyled isActive = {props.todo.completed}
               onDoubleClick={editTodo}>
               {props.todo.title}
             </NameStyled>

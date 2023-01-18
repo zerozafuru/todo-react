@@ -10,7 +10,6 @@ const Buttons = (props) => {
   const todos = useSelector((state) => state.todos.todos)
   const filtTodos = useSelector(filteredTodos)
   const filter = useSelector((state) => state.todos.filter)
-
   const setFilter = (value) => {
     dispatch(editFilter(value))
   }
@@ -27,27 +26,24 @@ const Buttons = (props) => {
         </NumberStyled>tasks
       </TasksNumberStyled>
       <FiltersStyled>
-        <ButtonStyled 
-          className={filter === 'all' ? 'active' : 'disabled'}
+        <ButtonStyled isActive = {filter === "all"}
           onClick={() => setFilter('all')}
         >
           all
         </ButtonStyled>
-        <ButtonStyled
-          className={filter === 'active' ? 'active' : 'disabled'}
+        <ButtonStyled isActive = {filter === "active"}
           onClick={() => setFilter('active')}
         >
           active
         </ButtonStyled>
-        <ButtonStyled
-          className={filter === 'done' ? 'active' : 'disabled'}
+        <ButtonStyled isActive = {filter === "done"}
           onClick={() => setFilter('done')}
         >
           done
         </ButtonStyled>
       </FiltersStyled>
       <DeleteAllStyled>
-        <ButtonStyled
+        <ButtonStyled clear = {true}
           onClick={() => dispatch(deleteDoneTodo())}
         >
           clear

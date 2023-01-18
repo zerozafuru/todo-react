@@ -24,6 +24,7 @@ export const ListStyled = styled.li`
   &:hover ${DeleteButtonStyled} {
     opacity: 1;
     transition: 0.3s;
+  }
 `
 
 export const BoxStyled = styled.div`
@@ -48,9 +49,6 @@ export const NameStyled = styled.div`
   border-bottom: solid 3px darkgray;
   padding: 5px 0;
   width: 100%;
-  &.done{
-    text-decoration: line-through;
-    color: grey;
-  }
-  &.active{}
+  text-decoration: ${(props) => props.isActive ? 'line-through' : 'none'};
+  color: ${(props) => props.isActive ? 'grey' : 'black'};
 `
