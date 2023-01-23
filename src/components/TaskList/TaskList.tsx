@@ -1,21 +1,20 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../hook";
 import TaskItem from "../TaskItem/TaskItem";
 import { filteredTodos } from "../../store/filtersSelector";
 
 import { UlStyled } from "./TaskList.styles";
 
-const TaskList = () => {
-
-  const todos = useSelector(filteredTodos)
+const TaskList: React.FC = () => {
+  const todos = useAppSelector(filteredTodos)
 
   return (
     <UlStyled>
-    {todos.map((todo:{id:string}) => (
-      <TaskItem
-        key={todo.id}
-        todo={todo}
-      />
-    ))}
+      {todos.map((todo) => (
+        <TaskItem
+          key={todo.id}
+          todo={todo}
+        />
+      ))}
     </UlStyled>
   )
 }

@@ -1,6 +1,6 @@
 import TodoForm from './components/TodoForm/TodoForm';
 import TaskList from './components/TaskList/TaskList';
-import Buttons from './components/Buttons/Buttons';
+import BottomPanel from './components/BottomPanel/BottomPanel';
 import Footer from './components/Footer/Footer';
 
 import AppStyled from './App.styles';
@@ -12,7 +12,7 @@ const App = () => {
       <AppStyled>
         <TodoForm />
         <TaskList />
-        <Buttons />
+        <BottomPanel />
       </AppStyled>
       <Footer />
     </>

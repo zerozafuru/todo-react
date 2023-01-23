@@ -1,16 +1,34 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { toggleCompleted, deleteTodo, renameTodo } from "../../store/todosSlice";
+import { useAppDispatch } from "../../hook";
+import {
+  toggleCompleted,
+  deleteTodo,
+  renameTodo
+} from "../../store/todosSlice";
 
-import { BoxStyled, DeleteButtonStyled, FormStyled, ListStyled, NameStyled, RenameStyled } from "./TaskItem.styles";
+import {
+  BoxStyled,
+  DeleteButtonStyled,
+  FormStyled, ListStyled,
+  NameStyled,
+  RenameStyled
+} from "./TaskItem.styles";
 
-const TaskItem = (props) => {
+interface TodoItemProps {
+  todo: {
+    id: string,
+    completed: boolean,
+    title: string
+  }
+}
+
+const TaskItem: React.FC<TodoItemProps> = (props) => {
   const [edit, setEdit] = useState(false);
-  const [title, setTitle] = useState(props.todo.title);
+  const [title, setTitle] = useState<string>(props.todo.title);
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const onTaskRename = (e) => {
+  const onTaskRename = (e: React.FormEvent<HTMLFormElement>) => {
 
     e.preventDefault();
     setEdit(false);
@@ -21,7 +39,7 @@ const TaskItem = (props) => {
     dispatch(renameTodo({ id: props.todo.id, text: title.trim() }))
   }
 
-  const editTitle = (e) => {
+  const editTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
 
@@ -29,6 +47,14 @@ const TaskItem = (props) => {
     setTitle(props.todo.title)
     setEdit(!edit)
   }
+
+const toggleComplete = () => {
+  dispatch(toggleCompleted(props.todo.id))
+}
+
+const deleteTask = () => {
+  dispatch(deleteTodo(props.todo.id))
+}
 
   return (
     <ListStyled>
@@ -38,7 +64,7 @@ const TaskItem = (props) => {
           <label >
             <input
               type='checkbox'
-              onChange={() => dispatch(toggleCompleted(props.todo.id))}
+              onChange={toggleComplete}
               checked={props.todo.completed}
             />
           </label>
@@ -51,7 +77,7 @@ const TaskItem = (props) => {
               autoFocus>
             </RenameStyled>
           ) : (
-            <NameStyled isActive = {props.todo.completed}
+            <NameStyled isActive={props.todo.completed}
               onDoubleClick={editTodo}>
               {props.todo.title}
             </NameStyled>
@@ -59,7 +85,7 @@ const TaskItem = (props) => {
         </BoxStyled>
         <DeleteButtonStyled
           type="button"
-          onClick={() => dispatch(deleteTodo(props.todo.id))}>
+          onClick={deleteTask}>
           &#10006;
         </DeleteButtonStyled>
       </FormStyled>

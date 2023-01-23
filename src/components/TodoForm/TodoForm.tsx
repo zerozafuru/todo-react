@@ -1,27 +1,32 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { createTodo, toggleAllCompleted } from "../../store/todosSlice"
 
-import { CompleteStyled, FormStyled, InputStyled } from "./TodoForm.styles";
+import {
+  CompleteStyled,
+  FormStyled,
+  InputStyled
+} from "./TodoForm.styles";
 
-const TodoForm = (props) => {
-  const dispatch = useDispatch()
+const TodoForm: React.FC = () => {
+  const dispatch = useAppDispatch()
 
   const [text, setText] = useState('');
 
-  const saveNewTodo = (e) => {
+  const saveNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!text.trim()) {
       return
     }
+
     dispatch(createTodo(text))
     setText('');
   }
 
-  const todos = useSelector((state) => state.todos.todos)
-  const isComplete = todos.every((todo) => todo.completed)
+  const todos = useAppSelector((state) => state.todos.todos)
+  const isComplete = todos.every((todo: { completed: boolean }) => todo.completed)
 
-  const editText = (e) => {
+  const editText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
   }
 

@@ -44,7 +44,11 @@ export const RenameStyled = styled.input`
   width: 100%;
 `
 
-export const NameStyled = styled.div`
+interface ITypeProps {
+  isActive: boolean;
+}
+
+export const NameStyled = styled.div<ITypeProps>`
   word-break: break-word;
   border-bottom: solid 3px darkgray;
   padding: 5px 0;

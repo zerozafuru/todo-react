@@ -1,28 +1,39 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { deleteDoneTodo, editFilter } from "../../store/todosSlice";
 import { filteredTodos } from "../../store/filtersSelector";
 
+import {
+  ButtonsStyled,
+  ButtonStyled,
+  DeleteAllStyled,
+  FiltersStyled,
+  NumberStyled,
+  TasksNumberStyled
+} from "./BottomPanel.styles";
 
-import { ButtonsStyled, ButtonStyled, DeleteAllStyled, FiltersStyled, NumberStyled, TasksNumberStyled } from "./Buttons.styles";
+const BottomPanel: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const todos = useAppSelector((state) => state.todos.todos)
+  const filteredTodosLength = useAppSelector(filteredTodos).length
+  const filter = useAppSelector((state) => state.todos.filter)
 
-const Buttons = () => {
-  const dispatch = useDispatch()
-  const todos = useSelector((state) => state.)
-  const filtTodos = useSelector(filteredTodos)
-  const filter = useSelector((state) => state.todos.filter)
   const setFilter = (value: string) => {
     dispatch(editFilter(value))
   }
 
+  const deleteDoneTask = () => {
+    dispatch(deleteDoneTodo())
+  }
+
   if (!todos.length) {
-    return
+    return null
   }
 
   return (
     <ButtonsStyled>
       <TasksNumberStyled>
         <NumberStyled>
-          {filtTodos.length}
+          {filteredTodosLength}
         </NumberStyled>tasks
       </TasksNumberStyled>
       <FiltersStyled>
@@ -44,7 +55,7 @@ const Buttons = () => {
       </FiltersStyled>
       <DeleteAllStyled>
         <ButtonStyled isClear={true} isActive={false}
-          onClick={() => dispatch(deleteDoneTodo())}
+          onClick={deleteDoneTask}
         >
           clear
         </ButtonStyled>
@@ -54,4 +65,4 @@ const Buttons = () => {
 
 }
 
-export default Buttons;
+export default BottomPanel;

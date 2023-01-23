@@ -2,9 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import todosReducer from './todosSlice';
 
-const saveLocal = (state) => {
-  localStorage.setItem('todos', JSON.stringify(state.todos.todos))
-  localStorage.setItem('filter', JSON.stringify(state.todos.filter))
+import { TodosState } from './todosSlice';
+
+const saveLocal = (state: TodosState): void => {
+  localStorage.setItem('todos', JSON.stringify(state.todos))
+  localStorage.setItem('filter', JSON.stringify(state.filter))
 }
 
 const store = configureStore({
@@ -14,12 +16,12 @@ const store = configureStore({
 })
 
 store.subscribe(() => {
-  saveLocal(store.getState())
+  saveLocal(store.getState().todos)
 })
 
 export default store
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDisputch = typeof store.dispatch;
+export type AppDispatch = typeof store.dispatch;
 
 

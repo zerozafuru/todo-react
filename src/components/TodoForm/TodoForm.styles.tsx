@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+// interface ITypeProps {
+//   onSubmit: () => void;
+// }
+
 export const FormStyled = styled.form`
   width: 100%;
   background-color: white;
