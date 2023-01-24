@@ -27,27 +27,32 @@ const BottomPanel: React.FC = () => {
       <div className="tasks-number">
         <span className="number">
           {filteredTodosLength}
-        </span>tasks
+        </span>
+        tasks
       </div>
       <div className="filters">
-        <FilterButtonStyled isActive={filter === "all"}
+        <FilterButtonStyled
+          isActive={filter === "all"}
           onClick={() => setFilter('all')}
         >
           all
         </FilterButtonStyled>
-        <FilterButtonStyled isActive={filter === "active"}
+        <FilterButtonStyled
+          isActive={filter === "active"}
           onClick={() => setFilter('active')}
         >
           active
         </FilterButtonStyled>
-        <FilterButtonStyled isActive={filter === "done"}
+        <FilterButtonStyled
+          isActive={filter === "done"}
           onClick={() => setFilter('done')}
         >
           done
         </FilterButtonStyled>
       </div>
       <div className="delete-done">
-        <FilterButtonStyled isClear={true}
+        <FilterButtonStyled
+          isClear={true}
           onClick={deleteDoneTask}
         >
           clear

@@ -1,11 +1,13 @@
-const localLoad = (key: string, value: string | []) => {
-  const item: string | null = localStorage.getItem(key)
+import { Todo } from "./todosSlice"
+
+const localLoad = <T>(key: string, value: T): T => {
+  const item = localStorage.getItem(key)
   if (item) {
     return JSON.parse(item)
   }
   return value
 }
 
-export const localTodos = localLoad('todos', [])
-export const localFilter = localLoad('filter', 'all')
+export const localTodos = localLoad('todos', [] as Todo[])
+export const localFilter = localLoad<string>('filter', 'all')
 

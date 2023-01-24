@@ -9,7 +9,9 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <FooterStyled>double click to change task</FooterStyled>
+    <FooterStyled>
+      double click to change task
+    </FooterStyled>
   )
 }
 

@@ -32,14 +32,14 @@ const TodoForm: React.FC = () => {
   return (
     <>
       <h1>todos</h1>
-      <FormStyled
-        onSubmit={saveNewTodo}>
+      <FormStyled onSubmit={saveNewTodo}>
         <CompleteBoxStyled
           isActive={Boolean(todos.length)}
           type='checkbox'
           onChange={toggleAllTasksComplete}
           checked={isComplete} />
-        <input className="new-task-panel"
+        <input
+          className="new-task-panel"
           autoFocus
           type="text"
           value={text}

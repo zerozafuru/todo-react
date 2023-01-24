@@ -51,7 +51,8 @@ const TaskItem: React.FC<TodoItemProps> = (props) => {
 
   return (
     <ListStyled>
-      <form className="list-item"
+      <form
+        className="list-item"
         onSubmit={onTaskRename} >
         <div className="complete-box">
           <label >
@@ -62,7 +63,8 @@ const TaskItem: React.FC<TodoItemProps> = (props) => {
             />
           </label>
           {edit ? (
-            <input className="rename-panel"
+            <input
+              className="rename-panel"
               value={title}
               onChange={editTitle}
               onBlur={editTodo}
@@ -70,13 +72,15 @@ const TaskItem: React.FC<TodoItemProps> = (props) => {
               autoFocus>
             </input>
           ) : (
-            <NamePanelStyled isActive={props.todo.completed}
+            <NamePanelStyled
+              isActive={props.todo.completed}
               onDoubleClick={editTodo}>
               {props.todo.title}
             </NamePanelStyled>
           )}
         </div>
-        <button className="delete-button"
+        <button
+          className="delete-button"
           type="button"
           onClick={deleteTask}>
           &#10006;

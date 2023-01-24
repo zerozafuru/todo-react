@@ -25,7 +25,7 @@ export const FilterButtonStyled = styled.button<Props>`
   }
 `
 
-export const BottomPanelStyled = styled.div`
+export const BottomPanelStyled = styled.div<Props>`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -72,5 +72,25 @@ export const BottomPanelStyled = styled.div`
     justify-content: flex-end;
     width: 33%;
   }
+
+  .filter-button {
+    display: flex;
+  width: max-content;
+  align-items: center;
+  text-align: center;
+  border: solid 1px;
+  border-radius: 30px;
+  border-color: transparent;
+  padding: 1px 5px;
+  color: ${(props) => props.isClear ? "black" : props.isActive ? "black" : "white"};
+  background-color: ${(props: Props) => props.isActive ? "white" : "transparent"};
+  transition: 0.3s;
+
+  &:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s;
+  }
+}
 `
 
