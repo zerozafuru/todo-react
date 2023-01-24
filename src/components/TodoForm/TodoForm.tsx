@@ -2,11 +2,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { createTodo, toggleAllCompleted } from "../../store/todosSlice"
 
-import {
-  CompleteStyled,
-  FormStyled,
-  InputStyled
-} from "./TodoForm.styles";
+import { CompleteBoxStyled, FormStyled, } from "./TodoForm.styles";
 
 const TodoForm: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -18,9 +14,12 @@ const TodoForm: React.FC = () => {
     if (!text.trim()) {
       return
     }
-
     dispatch(createTodo(text))
     setText('');
+  }
+
+  const toggleAllTasksComplete = () => {
+    dispatch(toggleAllCompleted())
   }
 
   const todos = useAppSelector((state) => state.todos.todos)
@@ -35,12 +34,12 @@ const TodoForm: React.FC = () => {
       <h1>todos</h1>
       <FormStyled
         onSubmit={saveNewTodo}>
-        <CompleteStyled
-          className={todos.length ? 'done' : 'active'}
+        <CompleteBoxStyled
+          isActive={Boolean(todos.length)}
           type='checkbox'
-          onChange={() => dispatch(toggleAllCompleted())}
+          onChange={toggleAllTasksComplete}
           checked={isComplete} />
-        <InputStyled
+        <input className="new-task-panel"
           autoFocus
           type="text"
           value={text}

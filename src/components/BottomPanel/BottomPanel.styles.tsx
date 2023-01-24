@@ -1,37 +1,11 @@
 import styled from "styled-components"
 
 interface Props {
-  isActive:boolean,
-  isClear:boolean | undefined
+  isActive?: boolean,
+  isClear?: boolean,
 }
 
-export const ButtonsStyled = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 20px;
-  gap: 5px;
-`
-
-export const TasksNumberStyled = styled.div`
-  width: 33%;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  font-size: 14px;
-`
-
-export const NumberStyled = styled.span`
-  border: solid 1px;
-  border-radius: 30px;
-  border: none;
-  padding: 1px 5px;
-  color: black;
-  background-color: white;
-`
-
-export const ButtonStyled = styled.button`
+export const FilterButtonStyled = styled.button<Props>`
   display: flex;
   width: max-content;
   align-items: center;
@@ -41,8 +15,9 @@ export const ButtonStyled = styled.button`
   border-color: transparent;
   padding: 1px 5px;
   color: ${(props) => props.isClear ? "black" : props.isActive ? "black" : "white"};
-  background-color: ${(props:Props) => props.isActive ? "white" : "transparent"};
+  background-color: ${(props: Props) => props.isActive ? "white" : "transparent"};
   transition: 0.3s;
+
   &:hover {
     background-color: white;
     color: black;
@@ -50,23 +25,52 @@ export const ButtonStyled = styled.button`
   }
 `
 
-export const FiltersStyled = styled.div`
+export const BottomPanelStyled = styled.div`
+  width: 100%;
   display: flex;
-  background-color: darkgray;
-  border-radius: 30px;
-  &:hover ${ButtonStyled} {
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  gap: 5px;
+  
+  .tasks-number {
+    width: 33%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .number {
+    border: solid 1px;
+    border-radius: 30px;
+    border: none;
+    padding: 1px 5px;
+    color: black;
+    background-color: white;
+  }
+
+  .filters {
+    display: flex;
+    background-color: darkgray;
+    border-radius: 30px;
+
+    &:hover ${FilterButtonStyled} {
       background-color: transparent;
       color: white;
+
       &:hover {
         background-color: white;
         color: black;
         transition: 0.3s;
       }
     }
+  }
+
+  .delete-done {
+    display: flex;
+    justify-content: flex-end;
+    width: 33%;
+  }
 `
 
-export const DeleteAllStyled = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 33%;
-`

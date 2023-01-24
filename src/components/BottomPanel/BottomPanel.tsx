@@ -1,19 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { deleteDoneTodo, editFilter } from "../../store/todosSlice";
 import { filteredTodos } from "../../store/filtersSelector";
+import { BottomPanelStyled, FilterButtonStyled } from "./BottomPanel.styles";
 
-import {
-  ButtonsStyled,
-  ButtonStyled,
-  DeleteAllStyled,
-  FiltersStyled,
-  NumberStyled,
-  TasksNumberStyled
-} from "./BottomPanel.styles";
 
 const BottomPanel: React.FC = () => {
   const dispatch = useAppDispatch()
-  const todos = useAppSelector((state) => state.todos.todos)
+  const todosLength = useAppSelector((state) => state.todos.todos).length
   const filteredTodosLength = useAppSelector(filteredTodos).length
   const filter = useAppSelector((state) => state.todos.filter)
 
@@ -25,42 +18,42 @@ const BottomPanel: React.FC = () => {
     dispatch(deleteDoneTodo())
   }
 
-  if (!todos.length) {
+  if (!todosLength) {
     return null
   }
 
   return (
-    <ButtonsStyled>
-      <TasksNumberStyled>
-        <NumberStyled>
+    <BottomPanelStyled >
+      <div className="tasks-number">
+        <span className="number">
           {filteredTodosLength}
-        </NumberStyled>tasks
-      </TasksNumberStyled>
-      <FiltersStyled>
-        <ButtonStyled isClear={false} isActive={filter === "all"}
+        </span>tasks
+      </div>
+      <div className="filters">
+        <FilterButtonStyled isActive={filter === "all"}
           onClick={() => setFilter('all')}
         >
           all
-        </ButtonStyled>
-        <ButtonStyled isClear={false} isActive={filter === "active"}
+        </FilterButtonStyled>
+        <FilterButtonStyled isActive={filter === "active"}
           onClick={() => setFilter('active')}
         >
           active
-        </ButtonStyled>
-        <ButtonStyled isClear={false} isActive={filter === "done"}
+        </FilterButtonStyled>
+        <FilterButtonStyled isActive={filter === "done"}
           onClick={() => setFilter('done')}
         >
           done
-        </ButtonStyled>
-      </FiltersStyled>
-      <DeleteAllStyled>
-        <ButtonStyled isClear={true} isActive={false}
+        </FilterButtonStyled>
+      </div>
+      <div className="delete-done">
+        <FilterButtonStyled isClear={true}
           onClick={deleteDoneTask}
         >
           clear
-        </ButtonStyled>
-      </DeleteAllStyled>
-    </ButtonsStyled>
+        </FilterButtonStyled>
+      </div>
+    </BottomPanelStyled>
   )
 
 }

@@ -6,13 +6,7 @@ import {
   renameTodo
 } from "../../store/todosSlice";
 
-import {
-  BoxStyled,
-  DeleteButtonStyled,
-  FormStyled, ListStyled,
-  NameStyled,
-  RenameStyled
-} from "./TaskItem.styles";
+import { ListStyled, NamePanelStyled } from "./TaskItem.styles";
 
 interface TodoItemProps {
   todo: {
@@ -29,7 +23,6 @@ const TaskItem: React.FC<TodoItemProps> = (props) => {
   const dispatch = useAppDispatch()
 
   const onTaskRename = (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
     setEdit(false);
     if (!title.trim()) {
@@ -48,19 +41,19 @@ const TaskItem: React.FC<TodoItemProps> = (props) => {
     setEdit(!edit)
   }
 
-const toggleComplete = () => {
-  dispatch(toggleCompleted(props.todo.id))
-}
+  const toggleComplete = () => {
+    dispatch(toggleCompleted(props.todo.id))
+  }
 
-const deleteTask = () => {
-  dispatch(deleteTodo(props.todo.id))
-}
+  const deleteTask = () => {
+    dispatch(deleteTodo(props.todo.id))
+  }
 
   return (
     <ListStyled>
-      <FormStyled
+      <form className="list-item"
         onSubmit={onTaskRename} >
-        <BoxStyled>
+        <div className="complete-box">
           <label >
             <input
               type='checkbox'
@@ -69,26 +62,26 @@ const deleteTask = () => {
             />
           </label>
           {edit ? (
-            <RenameStyled
+            <input className="rename-panel"
               value={title}
               onChange={editTitle}
               onBlur={editTodo}
               type="text"
               autoFocus>
-            </RenameStyled>
+            </input>
           ) : (
-            <NameStyled isActive={props.todo.completed}
+            <NamePanelStyled isActive={props.todo.completed}
               onDoubleClick={editTodo}>
               {props.todo.title}
-            </NameStyled>
+            </NamePanelStyled>
           )}
-        </BoxStyled>
-        <DeleteButtonStyled
+        </div>
+        <button className="delete-button"
           type="button"
           onClick={deleteTask}>
           &#10006;
-        </DeleteButtonStyled>
-      </FormStyled>
+        </button>
+      </form>
     </ListStyled>
   )
 }
